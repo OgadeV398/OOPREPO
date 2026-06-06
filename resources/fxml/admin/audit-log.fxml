@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.admin.AuditLogController"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <Label text="Audit Trail"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <Label text="This log is read-only. No entries can be edited or deleted."
+           style="-fx-text-fill: #c0392b; -fx-font-size: 13px;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Search:"/>
+        <TextField fx:id="searchField" promptText="Search by user or action..."
+                   prefWidth="300"/>
+        <Button text="Search" onAction="#handleSearch"
+                style="-fx-background-color: #2E75B6; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Show All" onAction="#loadAllLogs"
+                style="-fx-background-color: #595959; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+    <TableView fx:id="auditTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colUser" text="User" prefWidth="150"/>
+            <TableColumn fx:id="colAction" text="Action" prefWidth="250"/>
+            <TableColumn fx:id="colTarget" text="Target Table" prefWidth="120"/>
+            <TableColumn fx:id="colTargetId" text="Target ID" prefWidth="80"/>
+            <TableColumn fx:id="colTime" text="Timestamp" prefWidth="160"/>
+        </columns>
+    </TableView>
+</VBox>

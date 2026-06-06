@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SanteDiagnostics" default="run" basedir=".">
+
+    <property name="src.dir"       value="src"/>
+    <property name="resources.dir" value="resources"/>
+    <property name="build.dir"     value="build"/>
+    <property name="classes.dir"   value="${build.dir}/classes"/>
+    <property name="jar.dir"       value="${build.dir}/jar"/>
+    <property name="lib.dir"       value="lib"/>
+    <property name="main.class" value="com.santediagnostics.Main"/>
+    <property name="javafx.path"   value="C:\Users\chimd\Downloads\openjfx-25.0.2_windows-x64_bin-sdk\javafx-sdk-25.0.2\lib"/>
+
+    <!-- CLASSPATH -->
+    <!-- CLASSPATH -->
+<path id="classpath">
+    <fileset dir="${lib.dir}">
+        <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${javafx.path}">
+        <include name="*.jar"/>
+    </fileset>
+    <pathelement path="${classes.dir}"/>
+</path>
+
+    <!-- CLEAN -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- COMPILE -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               classpathref="classpath">
+        </javac>
+        <copy todir="${classes.dir}">
+            <fileset dir="${resources.dir}">
+                <include name="**/*.fxml"/>
+                <include name="**/*.css"/>
+                <include name="**/*.png"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- JAR -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/SanteDiagnostics.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- RUN -->
+    <target name="run" depends="jar">
+        <java classname="${main.class}" fork="true">
+            <classpath refid="classpath"/>
+            <jvmarg value="--module-path"/>
+            <jvmarg value="${javafx.path}"/>
+            <jvmarg value="--add-modules"/>
+            <jvmarg value="javafx.controls,javafx.fxml"/>
+            <jvmarg value="--add-opens"/>
+            <jvmarg value="javafx.fxml/com.sun.javafx.fxml=ALL-UNNAMED"/>
+        </java>
+    </target>
+
+    <!-- REBUILD -->
+    <target name="rebuild" depends="clean, jar"/>
+
+</project>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.santediagnostics.controllers.admin.AdminDashboardController"
+            style="-fx-background-color: #f0f4f8;">
+
+    <!-- TOP NAV BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: #1F3864; -fx-padding: 15;">
+            <Label text="Sante Diagnostics — Super Admin"
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Label fx:id="adminNameLabel"
+                   style="-fx-text-fill: #aaaaaa; -fx-font-size: 13px;"/>
+            <Button text="Logout" onAction="#handleLogout"
+                    style="-fx-background-color: #c0392b; -fx-text-fill: white;
+                           -fx-cursor: hand; -fx-font-size: 13px;"/>
+        </HBox>
+    </top>
+
+    <!-- SIDE NAV -->
+    <left>
+        <VBox spacing="5"
+              style="-fx-background-color: #2E75B6; -fx-padding: 20; -fx-min-width: 200px;">
+            <Button text="Dashboard" onAction="#showDashboard"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #1F3864; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-pref-height: 40px; -fx-cursor: hand;"/>
+            <Button text="Test Builder" onAction="#showTestBuilder"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-pref-height: 40px; -fx-cursor: hand;"/>
+            <Button text="Request Queue" onAction="#showRequestQueue"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-pref-height: 40px; -fx-cursor: hand;"/>
+            <Button text="Audit Log" onAction="#showAuditLog"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-pref-height: 40px; -fx-cursor: hand;"/>
+            <Button text="Create Account" onAction="#showCreateAccount"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-pref-height: 40px; -fx-cursor: hand;"/>
+        </VBox>
+    </left>
+
+    <!-- MAIN CONTENT AREA -->
+    <center>
+        <StackPane fx:id="contentArea"
+                   style="-fx-padding: 30;">
+            <VBox spacing="20" alignment="CENTER">
+                <Label text="Welcome to the Admin Dashboard"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+                <Label text="Use the menu on the left to navigate."
+                       style="-fx-font-size: 14px; -fx-text-fill: #595959;"/>
+
+                <!-- STAT CARDS -->
+                <HBox spacing="20" alignment="CENTER">
+                    <VBox alignment="CENTER" spacing="5"
+                          style="-fx-background-color: white; -fx-padding: 20;
+                                 -fx-min-width: 160px; -fx-effect: dropshadow(gaussian, #cccccc, 5, 0, 0, 2);">
+                        <Label fx:id="totalTestsLabel" text="0"
+                               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2E75B6;"/>
+                        <Label text="Test Types"
+                               style="-fx-text-fill: #595959;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5"
+                          style="-fx-background-color: white; -fx-padding: 20;
+                                 -fx-min-width: 160px; -fx-effect: dropshadow(gaussian, #cccccc, 5, 0, 0, 2);">
+                        <Label fx:id="pendingRequestsLabel" text="0"
+                               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #e67e22;"/>
+                        <Label text="Pending Requests"
+                               style="-fx-text-fill: #595959;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5"
+                          style="-fx-background-color: white; -fx-padding: 20;
+                                 -fx-min-width: 160px; -fx-effect: dropshadow(gaussian, #cccccc, 5, 0, 0, 2);">
+                        <Label fx:id="unpaidRequestsLabel" text="0"
+                               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #c0392b;"/>
+                        <Label text="Unpaid Requests"
+                               style="-fx-text-fill: #595959;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5"
+                          style="-fx-background-color: white; -fx-padding: 20;
+                                 -fx-min-width: 160px; -fx-effect: dropshadow(gaussian, #cccccc, 5, 0, 0, 2);">
+                        <Label fx:id="totalUsersLabel" text="0"
+                               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #27ae60;"/>
+                        <Label text="Total Users"
+                               style="-fx-text-fill: #595959;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

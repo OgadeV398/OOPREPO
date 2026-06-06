@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.auth.LoginController"
+      alignment="CENTER"
+      spacing="15"
+      style="-fx-background-color: #f0f4f8; -fx-padding: 60;">
+
+    <Label text="Sante Diagnostics"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <Label text="Laboratory Information System"
+           style="-fx-font-size: 14px; -fx-text-fill: #595959;"/>
+
+    <VBox spacing="5" maxWidth="350">
+        <Label text="Email Address"
+               style="-fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+        <TextField fx:id="emailField"
+                   promptText="Enter your email"
+                   style="-fx-pref-height: 40px; -fx-font-size: 14px;"/>
+    </VBox>
+
+    <VBox spacing="5" maxWidth="350">
+        <Label text="Password"
+               style="-fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+        <PasswordField fx:id="passwordField"
+                       promptText="Enter your password"
+                       style="-fx-pref-height: 40px; -fx-font-size: 14px;"/>
+    </VBox>
+
+    <Label fx:id="errorLabel"
+           style="-fx-text-fill: red; -fx-font-size: 13px;"
+           text=""/>
+
+    <Button fx:id="loginButton"
+            text="Login"
+            onAction="#handleLogin"
+            style="-fx-background-color: #2E75B6; -fx-text-fill: white;
+                   -fx-font-size: 14px; -fx-pref-width: 350px; -fx-pref-height: 40px;
+                   -fx-cursor: hand;"/>
+
+    <Label text="Sante Diagnostics Ltd © 2025"
+           style="-fx-text-fill: #999999; -fx-font-size: 11px;"/>
+
+</VBox>

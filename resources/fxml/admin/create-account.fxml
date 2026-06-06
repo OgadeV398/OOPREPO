@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.admin.CreateAccountController"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <Label text="Create New Account"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <HBox spacing="20">
+
+        <!-- FORM -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20;
+                                   -fx-min-width: 350px;
+                                   -fx-effect: dropshadow(gaussian, #cccccc, 5, 0, 0, 2);">
+
+            <Label text="New User Details"
+                   style="-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #1F3864;"/>
+
+            <VBox spacing="5">
+                <Label text="Full Name"/>
+                <TextField fx:id="fullNameField" promptText="Enter full name"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Email Address"/>
+                <TextField fx:id="emailField" promptText="Enter email address"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Temporary Password"/>
+                <PasswordField fx:id="passwordField" promptText="Set a temporary password"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Role"/>
+                <ComboBox fx:id="roleBox" promptText="Select role" maxWidth="Infinity"/>
+            </VBox>
+
+            <Label fx:id="messageLabel" style="-fx-text-fill: green;"/>
+
+            <Button text="Create Account" onAction="#handleCreateAccount"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #2E75B6; -fx-text-fill: white;
+                           -fx-pref-height: 40px; -fx-cursor: hand;"/>
+        </VBox>
+
+        <!-- EXISTING ACCOUNTS TABLE -->
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Existing Staff Accounts"
+                   style="-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #1F3864;"/>
+            <TableView fx:id="accountTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colName" text="Full Name" prefWidth="160"/>
+                    <TableColumn fx:id="colEmail" text="Email" prefWidth="200"/>
+                    <TableColumn fx:id="colRole" text="Role" prefWidth="130"/>
+                    <TableColumn fx:id="colCreated" text="Created" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

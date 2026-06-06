@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.admin.RequestQueueController"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <Label text="Test Request Queue"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Filter by payment:"/>
+        <ComboBox fx:id="paymentFilterBox" promptText="All"/>
+        <Button text="Refresh" onAction="#loadRequests"
+                style="-fx-background-color: #2E75B6; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Label fx:id="messageLabel" style="-fx-text-fill: green;"/>
+    </HBox>
+
+    <TableView fx:id="requestTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150"/>
+            <TableColumn fx:id="colTest" text="Test Type" prefWidth="150"/>
+            <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+            <TableColumn fx:id="colPayment" text="Payment" prefWidth="100"/>
+            <TableColumn fx:id="colDate" text="Requested" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Mark as Paid" onAction="#handleMarkPaid"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                       -fx-pref-height: 40px; -fx-cursor: hand; -fx-pref-width: 150px;"/>
+        <Button text="Mark as Unpaid" onAction="#handleMarkUnpaid"
+                style="-fx-background-color: #e67e22; -fx-text-fill: white;
+                       -fx-pref-height: 40px; -fx-cursor: hand; -fx-pref-width: 150px;"/>
+    </HBox>
+</VBox>

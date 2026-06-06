@@ -1,0 +1,41 @@
+package com.santediagnostics.auth;
+
+import com.santediagnostics.models.User;
+
+public class SessionManager {
+
+    private static SessionManager instance;
+    private User currentUser;
+
+    private SessionManager() {}
+
+    public static SessionManager getInstance() {
+        if (instance == null) {
+            instance = new SessionManager();
+        }
+        return instance;
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public String getCurrentRole() {
+        if (currentUser != null) {
+            return currentUser.getRole();
+        }
+        return null;
+    }
+
+    public boolean isLoggedIn() {
+        return currentUser != null;
+    }
+
+    public void logout() {
+        currentUser = null;
+    }
+}

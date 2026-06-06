@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.admin.TestBuilderController"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <Label text="Test Builder"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <!-- FORM -->
+    <HBox spacing="20">
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20;
+                                   -fx-min-width: 350px;
+                                   -fx-effect: dropshadow(gaussian, #cccccc, 5, 0, 0, 2);">
+            <Label text="Create New Test Type"
+                   style="-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #1F3864;"/>
+
+            <VBox spacing="5">
+                <Label text="Test Name"/>
+                <TextField fx:id="testNameField" promptText="e.g. Blood Count Test"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Price (₦)"/>
+                <TextField fx:id="priceField" promptText="e.g. 5000"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Turnaround Time (hours)"/>
+                <TextField fx:id="tatField" promptText="e.g. 24"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Result Format"/>
+                <ComboBox fx:id="resultFormatBox" promptText="Select format"
+                          maxWidth="Infinity"/>
+            </VBox>
+
+            <Label fx:id="formMessageLabel" style="-fx-text-fill: green;"/>
+
+            <Button text="Save Test Type" onAction="#handleSaveTest"
+                    style="-fx-background-color: #2E75B6; -fx-text-fill: white;
+                           -fx-pref-height: 40px; -fx-cursor: hand;"
+                    maxWidth="Infinity"/>
+        </VBox>
+
+        <!-- TABLE -->
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Existing Test Types"
+                   style="-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #1F3864;"/>
+            <TableView fx:id="testTypeTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colName" text="Test Name" prefWidth="180"/>
+                    <TableColumn fx:id="colPrice" text="Price (₦)" prefWidth="100"/>
+                    <TableColumn fx:id="colTAT" text="TAT (hrs)" prefWidth="100"/>
+                    <TableColumn fx:id="colFormat" text="Format" prefWidth="100"/>
+                </columns>
+            </TableView>
+            <Button text="Delete Selected" onAction="#handleDeleteTest"
+                    style="-fx-background-color: #c0392b; -fx-text-fill: white;
+                           -fx-cursor: hand; -fx-pref-height: 35px;"/>
+        </VBox>
+    </HBox>
+</VBox>
