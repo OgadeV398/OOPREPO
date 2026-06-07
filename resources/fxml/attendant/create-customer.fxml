@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox spacing="15" alignment="CENTER" style="-fx-padding: 40; -fx-background-color: #f0f4f8;"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.attendant.CreateCustomerController">
+    <Label text="Create Customer Account" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <TextField fx:id="fullNameField" promptText="Full Name" maxWidth="300"/>
+    <TextField fx:id="emailField" promptText="Email" maxWidth="300"/>
+    <PasswordField fx:id="passwordField" promptText="Temporary Password" maxWidth="300"/>
+    <Button text="Create Customer" onAction="#handleCreate" style="-fx-background-color: #2E75B6; -fx-text-fill: white;"/>
+    <Label fx:id="messageLabel"/>
+    <Button text="Back" onAction="#handleBack" style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+</VBox>

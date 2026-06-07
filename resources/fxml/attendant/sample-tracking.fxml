@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.attendant.SampleTrackingController"
+      spacing="20" style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <Label text="Sample Tracking" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <TableView fx:id="sampleTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colRequestId" text="Request ID" prefWidth="80"/>
+            <TableColumn fx:id="colCustomer" text="Customer" prefWidth="180"/>
+            <TableColumn fx:id="colTest" text="Test Type" prefWidth="180"/>
+            <TableColumn fx:id="colSampleStatus" text="Sample Status" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Update status to:"/>
+        <ComboBox fx:id="statusCombo" promptText="Select status"/>
+        <Button text="Update" onAction="#handleUpdateStatus"
+                style="-fx-background-color: #2E75B6; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Refresh" onAction="#loadSamples"
+                style="-fx-background-color: #595959; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: green;"/>
+    <Button text="⬅ Back to Dashboard" onAction="#handleBack"
+            style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+</VBox>

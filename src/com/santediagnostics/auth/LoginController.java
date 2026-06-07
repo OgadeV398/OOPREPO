@@ -2,73 +2,93 @@ package com.santediagnostics.auth;
 
 import com.santediagnostics.db.DBConnection;
 import com.santediagnostics.models.User;
-import com.santediagnostics.utils.SceneNavigator;
 import com.santediagnostics.utils.AuditLogger;
+import com.santediagnostics.utils.SceneNavigator;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import java.sql.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginController {
 
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label errorLabel;
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private Label errorLabel;
 
     @FXML
     private void handleLogin() {
+
         String email = emailField.getText().trim();
         String password = passwordField.getText().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            errorLabel.setText("Please enter both email and password.");
+            errorLabel.setText("Please enter email and password.");
             return;
         }
 
         User user = getUserByEmail(email);
 
         if (user == null) {
-            errorLabel.setText("No account found with that email.");
+            errorLabel.setText("Account not found.");
             return;
         }
 
-        boolean verified = BCrypt.checkpw(password, user.getPasswordHash());
+        boolean validPassword = BCrypt.checkpw(password, user.getPasswordHash());
 
-        if (!verified) {
-            errorLabel.setText("Incorrect password. Please try again.");
+        if (!validPassword) {
+            errorLabel.setText("Incorrect password.");
             return;
         }
 
-        // Set current session
         SessionManager.getInstance().setCurrentUser(user);
 
-        // Log the login action
         AuditLogger.log(user.getId(), "User logged in");
 
-        // Force password change on first login
+        System.out.println("Logged in as: " + user.getRole());
+
         if (user.isFirstLogin()) {
+            // Make sure change-password.fxml exists under resources/fxml/
             SceneNavigator.navigateTo("/fxml/change-password.fxml", "Change Password");
             return;
         }
 
-        // Navigate based on role
         switch (user.getRole()) {
+
             case "SUPER_ADMIN":
+                // Assuming admin dashboard is at resources/fxml/admin/admin-dashboard.fxml
                 SceneNavigator.navigateTo("/fxml/admin/admin-dashboard.fxml", "Super Admin Dashboard");
                 break;
+
             case "LAB_ATTENDANT":
+                // Correct path based on your file system
                 SceneNavigator.navigateTo("/fxml/attendant/attendant-dashboard.fxml", "Lab Attendant Dashboard");
                 break;
+
             case "CUSTOMER":
+                // If customer dashboard exists, use /fxml/customer/customer-dashboard.fxml
                 SceneNavigator.navigateTo("/fxml/customer/customer-dashboard.fxml", "Customer Dashboard");
                 break;
+
             default:
-                errorLabel.setText("Unknown role. Contact administrator.");
+                errorLabel.setText("Unknown role: " + user.getRole());
         }
     }
 
     private User getUserByEmail(String email) {
+
         String sql = "SELECT * FROM users WHERE email = ?";
+
         try {
             Connection conn = DBConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -87,7 +107,7 @@ public class LoginController {
                 return user;
             }
         } catch (SQLException e) {
-            System.out.println("Login query error: " + e.getMessage());
+            System.out.println("Login Error: " + e.getMessage());
         }
         return null;
     }

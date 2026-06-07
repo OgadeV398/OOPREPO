@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.santediagnostics.controllers.attendant.ResultUploadController"
+      spacing="20" style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <Label text="Upload Test Result" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1F3864;"/>
+
+    <HBox spacing="10">
+        <Label text="Request ID:"/>
+        <ComboBox fx:id="requestCombo" promptText="Select pending request" prefWidth="200"/>
+        <Button text="Load Request Details" onAction="#loadRequestDetails"
+                style="-fx-background-color: #2E75B6; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+    <VBox spacing="5">
+        <Label text="Customer:"/>
+        <Label fx:id="customerLabel" style="-fx-font-weight: bold;"/>
+        <Label text="Test Type:"/>
+        <Label fx:id="testTypeLabel" style="-fx-font-weight: bold;"/>
+    </VBox>
+
+    <VBox spacing="5">
+        <Label text="Result (text):"/>
+        <TextArea fx:id="resultArea" prefHeight="150"/>
+    </VBox>
+
+    <HBox spacing="10">
+        <CheckBox fx:id="verifiedCheckbox" text="Mark as verified (visible to customer)"/>
+        <Button text="Upload Result" onAction="#handleUpload"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: green;"/>
+    <Button text="⬅ Back to Dashboard" onAction="#handleBack"
+            style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+</VBox>
